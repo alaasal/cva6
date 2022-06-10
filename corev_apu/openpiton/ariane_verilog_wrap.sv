@@ -171,26 +171,26 @@ module ariane_verilog_wrap
   /////////////////////////////
 
   localparam ariane_pkg::ariane_cfg_t ArianeOpenPitonCfg = '{
-    RASDepth:              RASDepth,
-    BTBEntries:            BTBEntries,
-    BHTEntries:            BHTEntries,
+    RASDepth:              2,
+    BTBEntries:            32,
+    BHTEntries:            128,
     // idempotent region
-    NrNonIdempotentRules:  NrNonIdempotentRules,
-    NonIdempotentAddrBase: NonIdempotentAddrBase,
-    NonIdempotentLength:   NonIdempotentLength,
-    NrExecuteRegionRules:  NrExecuteRegionRules,
-    ExecuteRegionAddrBase: ExecuteRegionAddrBase,
-    ExecuteRegionLength:   ExecuteRegionLength,
+    NrNonIdempotentRules:  1,
+    NonIdempotentAddrBase: {64'h0},
+    NonIdempotentLength:   {64'h8000_0000},
+    NrExecuteRegionRules:  5,
+    ExecuteRegionAddrBase: {64'h8000_0000, 64'h1C00_0000, 64'h0001_000, 64'h0000_0000},
+    ExecuteRegionLength:   {64'h20000000, 64'h100000, 64'h10000, 64'h1000},
     // cached region
-    NrCachedRegionRules:   NrCachedRegionRules,
-    CachedRegionAddrBase:  CachedRegionAddrBase,
-    CachedRegionLength:    CachedRegionLength,
+    NrCachedRegionRules:   2,
+    CachedRegionAddrBase:  {64'h8000_0000},
+    CachedRegionLength:    {64'h20000000},
     // cache config
-    Axi64BitCompliant:     1'b0,
-    SwapEndianess:         SwapEndianess,
+    Axi64BitCompliant:     1'b1,
+    SwapEndianess:         1'b0,
     // debug
-    DmBaseAddress:         DmBaseAddress,
-    NrPMPEntries:          NrPMPEntries
+    DmBaseAddress:         64'h0000_0000,
+    NrPMPEntries:          8
   };
 
   ariane #(
